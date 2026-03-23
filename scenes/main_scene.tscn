@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dc3w5xpy6cey3"]
 
 [ext_resource type="Script" uid="uid://b7ycuykj3d3fl" path="res://scripts/camera/CameraController.cs" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://dr1s3j0skhwd6" path="res://scripts/PlayerController.cs" id="2_7ykc4"]
 [ext_resource type="PackedScene" uid="uid://da5ri8f0houhm" path="res://external res/characters/KayKit_Character_Animations_1.1/Mannequin Character/characters/Mannequin_Medium.glb" id="2_pw63i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_und3l"]
@@ -16,11 +17,15 @@ sky = SubResource("Sky_w2twt")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pu3yx"]
+height = 2.3625002
+
 [node name="MainScene" type="Node3D" unique_id=356935055]
 
-[node name="MainCamera3D" type="Camera3D" parent="." unique_id=1434672062]
+[node name="MainCamera3D" type="Camera3D" parent="." unique_id=1434672062 node_paths=PackedStringArray("toFollow")]
 transform = Transform3D(-1, 6.181724e-08, -6.181724e-08, 0, 0.7071068, 0.7071068, 8.742278e-08, 0.7071068, -0.7071068, 0, 10.2, -16.6)
 script = ExtResource("1_w2twt")
+toFollow = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1567387162]
 environment = SubResource("Environment_pw63i")
@@ -92,8 +97,13 @@ radius = 0.6
 height = 6.0
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1674994807]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -7.6)
+script = ExtResource("2_7ykc4")
 
 [node name="Pivot" type="Node3D" parent="Player" unique_id=67016588]
 
-[node name="Mannequin_Medium" parent="Player/Pivot" unique_id=1088904459 instance=ExtResource("2_pw63i")]
+[node name="Model" parent="Player/Pivot" unique_id=1088904459 instance=ExtResource("2_pw63i")]
+
+[node name="Collision" type="CollisionShape3D" parent="Player" unique_id=1836759610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1187499, 0)
+shape = SubResource("CapsuleShape3D_pu3yx")
