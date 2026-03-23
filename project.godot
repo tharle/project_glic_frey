@@ -15,6 +15,10 @@ run/main_scene="uid://dc3w5xpy6cey3"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugDraw="*uid://bn43djuk3mtbh"
+
 [dotnet]
 
 project/assembly_name="project_glic_frey"

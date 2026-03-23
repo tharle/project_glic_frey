@@ -10,11 +10,7 @@ public partial class CameraController : Camera3D
 
 	private Vector3 _deltaTargetDistance;
 
-	public Vector3 Forward{get
-		{
-			return -GlobalTransform.Basis.Z.Normalized();
-		}
-	}
+	public Vector3 Forward{get { return -GlobalTransform.Basis.Z.Normalized(); } }
 
     public override void _Ready()
     {
@@ -57,17 +53,12 @@ public partial class CameraController : Camera3D
 
     }
 
-	public override void _Draw()
-    {
-        // Your draw commands here.
-    }
 
-
-	private void DrawForward()
-	{
-		Vector3 forward  = Forward;
-		Vector3 pointForward = Position + (Forward * 5.0f);
-		Debug.DrawLine(Position, pointForward, Colors.Green, 2.0f);
-	}
+	// private void DrawForward()
+	// {
+	// 	Vector3 forward  = Forward;
+	// 	Vector3 pointForward = Position + (Forward * 5.0f);
+	// 	Debug.DrawLine(Position, pointForward, Colors.Green, 2.0f);
+	// }
 
 }

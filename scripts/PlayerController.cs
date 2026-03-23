@@ -5,6 +5,8 @@ public partial class PlayerController : CharacterBody3D
 {
 	public float Speed {get; set;} = 5.0f;
 
+	public Vector3 Forward{get { return -GlobalTransform.Basis.Z; } }
+
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
@@ -30,5 +32,8 @@ public partial class PlayerController : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		//DebugDraw.Instance.DrawVector(Forward, 5, Colors.Green);
+		DebugDraw.Instance.DrawLine(Position, Position + Vector3.Forward * 5, Colors.Green);
 	}
 }

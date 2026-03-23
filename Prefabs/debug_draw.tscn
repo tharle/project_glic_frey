@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bn43djuk3mtbh"]
+
+[ext_resource type="Script" uid="uid://bn3yhvuh36bcc" path="res://scripts/debug/DebugDraw.cs" id="1_eqcrk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu3yx"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_gubc5"]
+
+[node name="DebugDraw" type="Node" unique_id=875161218]
+script = ExtResource("1_eqcrk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2063683454]
+material_override = SubResource("StandardMaterial3D_pu3yx")
+mesh = SubResource("ImmediateMesh_gubc5")
