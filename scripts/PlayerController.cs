@@ -1,11 +1,12 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PlayerController : CharacterBody3D
 {
 	public float Speed {get; set;} = 5.0f;
 
-	public Vector3 Forward{get { return -GlobalTransform.Basis.Z; } }
+	public Vector3 Forward{get { return -GlobalTransform.Basis.Z.Normalized(); } }
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -33,7 +34,7 @@ public partial class PlayerController : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 
-		//DebugDraw.Instance.DrawVector(Forward, 5, Colors.Green);
-		DebugDraw.Instance.DrawLine(Position, Position + Vector3.Forward * 5, Colors.Green);
+		//DebugDraw.Instance.DrawVector(Position, Forward, 10, Colors.Green);
+		//DebugDraw.Instance.DrawLine(Position, Position - Vector3.Forward * 5, Colors.Green);
 	}
 }

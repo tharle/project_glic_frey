@@ -6,7 +6,7 @@ public partial class CameraController : Camera3D
 {
 	[Export] Node3D toFollow;
 	public float Speed {get; set;} = 3.0f;
-	public float rotationSpeed = 15.0f; // angle per second
+	public float angle = Mathf.Pi / 4; // 45
 
 	private Vector3 _deltaTargetDistance;
 
@@ -41,15 +41,26 @@ public partial class CameraController : Camera3D
 	private void RotateCamera(double delta)
     {
 		float inputRotationDir = Input.GetAxis("camera_rotate_right" , "camera_rotate_left");
-		GD.Print($"ROTATE CAMERA: Dir -> {inputRotationDir}");
+		// //GD.Print($"ROTATE CAMERA: Dir -> {inputRotationDir}");
 		if(inputRotationDir == 0) return;
 
-        Vector3 dirToTarget = (toFollow.Position - Position).Normalized();
-		float angle = dirToTarget.AngleTo(Forward);
-		GD.Print($"ANGLE -> {angle}");
-		float rotationSpeedDelta = rotationSpeed * (float) delta;
+        // Vector3 dirToTarget = (toFollow.Position - Position).Normalized();
+		// float angle = dirToTarget.AngleTo(Forward);
+		// //GD.Print($"ANGLE -> {angle}");
+		float rotationSpeedDelta = angle * (float) delta * inputRotationDir;
 		
-		angle += inputRotationDir * rotationSpeedDelta;
+		// angle += inputRotationDir * rotationSpeedDelta;
+		//float velocity = (float) delta * rotationSpeed * inputRotationDir;
+		//Position = Position.MoveToward(toFollow.Position, velocity);
+
+		//LookAt(toFollow.GlobalPosition, Vector3.Up);
+		//Smooth rotation
+		// Vector3 targetDir = GlobalPosition.DirectionTo(toFollow.GlobalPosition);
+		// Basis targetBasis = Basis.LookingAt(targetDir);
+		// Basis = Basis.Slerp(targetBasis, .5f); // weight between 0-1
+
+		//RotateY((float)delta * rotationSpeed);
+		RotateObjectLocal(Vector3.Up, rotationSpeedDelta );
 
     }
 

@@ -22,9 +22,11 @@ public partial class DebugDraw : Node
        _drawDebug.ClearSurfaces();
     }
 
-	public void DrawVector(Vector3 v, float size, Color color = default)
+	public void DrawVector(Vector3 start, Vector3 vector, float size, Color color = default)
 	{
-		DrawLine(v, v * size, color);
+		Vector3 end = start * vector * size;
+		//GD.Print($"DEBUG - DIRECTION : {end}");
+		DrawLine(start, end, color);
 	}
 
 
